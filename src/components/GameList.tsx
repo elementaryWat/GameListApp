@@ -6,6 +6,7 @@ import { RootState } from "../store/store";
 import { Game } from "../types/Game";
 import { GameCard, GameImage, GameTitle } from "./styled";
 import gamesData from "../data/games.json";
+import FastImage from "react-native-fast-image";
 
 const GameList = () => {
   const dispatch = useDispatch();
@@ -19,13 +20,28 @@ const GameList = () => {
     // Implement custom Android bridge here.
   };
 
+  const extractIdFromSteamUrl = (steamUrl: string): string => {
+    const idMatch = steamUrl.match(/\/app\/(\d+)/);
+    return idMatch ? idMatch[1] : "";
+  };
+
   const renderItem = ({ item }: { item: Game }) => {
-    const imageUrl = `https://steamcdn-a.akamaihd.net/steam/apps/251570/library_600x900_2x.jpg`;
+    const imageId = extractIdFromSteamUrl(item.steamUrl);
+    const imageUrl = `https://steamcdn-a.akamaihd.net/steam/apps/${imageId}/library_600x900_2x.jpg`;
+    const fallbackImageUrl = "https://via.placeholder.com/300x450";
 
     return (
       <TouchableOpacity onPress={() => showToast(item.title)}>
         <GameCard>
-          <GameImage source={{ uri: imageUrl }} />
+          <GameImage
+            source={{
+              uri: imageUrl,
+              priority: FastImage.priority.normal,
+            }}
+            resizeMode={FastImage.resizeMode.cover}
+            defaultSource={fallbackImageUrl}
+          />
+
           <GameTitle>{item.title}</GameTitle>
         </GameCard>
       </TouchableOpacity>

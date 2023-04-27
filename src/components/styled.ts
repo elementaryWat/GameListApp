@@ -1,3 +1,4 @@
+import FastImage from "react-native-fast-image";
 import styled from "styled-components/native";
 
 export const GameCard = styled.View`
@@ -13,7 +14,7 @@ export const GameTitle = styled.Text`
   font-weight: bold;
 `;
 
-export const GameImage = styled.Image`
+export const GameImage = styled(FastImage)`
   width: 300px;
   height: 450px;
   border-radius: 5px;
