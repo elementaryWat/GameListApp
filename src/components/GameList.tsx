@@ -33,7 +33,7 @@ const GameList = () => {
 
     return (
       <TouchableOpacity onPress={() => showToast(item.title)}>
-        <GameCard>
+        <GameCard testID="game-card">
           <GameImage
             source={{
               uri: imageUrl,
