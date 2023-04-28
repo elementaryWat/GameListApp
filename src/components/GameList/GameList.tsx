@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, FlatList, TouchableOpacity } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { setGames } from "../store/gameSlice";
-import { RootState } from "../store/store";
-import { Game } from "../types/Game";
-import { GameCard, GameImage, GameTitle } from "./styled";
-import gamesData from "../data/games.json";
+import { setGames } from "../../store/gameSlice";
+import { RootState } from "../../store/store";
+import { Game } from "../../types/Game";
+import { GameCard, GameImage, GameTitle } from "../GameList/styled";
+import gamesData from "../../data/games.json";
 import FastImage from "react-native-fast-image";
-import ToastModule from "./native/ToastModule";
+import ToastModule from "../native/ToastModule";
+import ErrorScreen from "../ErrorScreen/ErrorScreen";
 
 const GameList = () => {
   const [imageError, setImageError] = useState(false);
@@ -26,6 +27,11 @@ const GameList = () => {
     // };
 
     // fetchGames();
+    try {
+      dispatch(setGames(gamesData));
+    } catch (error) {
+      setImageError(true);
+    }
     const updatedGames = gamesData.map((game) => {
       let imageUrl;
       if (game.steamUrl) {
@@ -40,7 +46,11 @@ const GameList = () => {
   }, [dispatch]);
 
   const showToast = (gameTitle: string) => {
-    ToastModule.showToast(gameTitle);
+    if (ToastModule) {
+      ToastModule.showToast(gameTitle);
+    } else {
+      console.error("ToastModule is not available");
+    }
   };
 
   const extractIdFromSteamUrl = (steamUrl: string): string => {
@@ -57,6 +67,12 @@ const GameList = () => {
         dispatch(setGames(updatedGames));
       }
     };
+
+    if (imageError) {
+      const errorImageUrl = "https://path/to/your/error-image.jpg";
+      return <ErrorScreen errorImageUrl={errorImageUrl} />;
+    }
+
     return (
       <TouchableOpacity onPress={() => showToast(item.title)}>
         <GameCard testID="game-card">

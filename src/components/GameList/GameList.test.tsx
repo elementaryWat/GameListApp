@@ -8,14 +8,14 @@ import {
 } from "@testing-library/react-native";
 import { Provider } from "react-redux";
 import GameList from "./GameList";
-import store from "../store/store";
-import gamesData from "../data/games.json";
-import { setGames } from "../store/gameSlice";
+import store from "../../store/store";
+import gamesData from "../../data/games.json";
+import { setGames } from "../../store/gameSlice";
 
 jest.mock("./native/ToastModule", () => ({
   showToast: jest.fn(),
 }));
-import ToastModule from "./native/ToastModule";
+import ToastModule from "../native/ToastModule";
 
 describe("GameList", () => {
   test("renders a list of games", async () => {

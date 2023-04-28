@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import { Provider } from "react-redux";
-import store from "./src/store/store";
-import GameList from "./src/components/GameList";
+import store from "./store/store";
+import GameList from "./components/GameList/GameList";
 
 export default function App() {
   return (
