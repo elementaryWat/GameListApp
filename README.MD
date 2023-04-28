@@ -10,6 +10,10 @@ This is a React Native app built with Expo, Typescript, Styled Components, and R
 - Includes error handling and test cases
 - Uses a custom Android bridge for toast notifications
 
+## Demo
+
+![Demo GIF](https://github.com/elementaryWat/GameListApp/blob/master/recording-app.gif)
+
 ## Installing required dependencies
 
 1. Install [Node.js](https://nodejs.org/en/download/) and [Expo CLI](https://docs.expo.dev/get-started/installation/):
