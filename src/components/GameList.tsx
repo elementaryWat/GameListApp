@@ -61,6 +61,7 @@ const GameList = () => {
       <TouchableOpacity onPress={() => showToast(item.title)}>
         <GameCard testID="game-card">
           <GameImage
+            testID="game-image"
             source={{
               uri: item.imageUrl,
               priority: FastImage.priority.normal,

@@ -21,4 +21,4 @@ const gameSlice = createSlice({
 
 export const { setGames } = gameSlice.actions;
 
-export default gameSlice.reducer;
+export default gameSlice;
