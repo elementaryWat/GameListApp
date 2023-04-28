@@ -7,6 +7,7 @@ import { Game } from "../types/Game";
 import { GameCard, GameImage, GameTitle } from "./styled";
 import gamesData from "../data/games.json";
 import FastImage from "react-native-fast-image";
+import ToastModule from "./native/ToastModule";
 
 const GameList = () => {
   const dispatch = useDispatch();
@@ -17,7 +18,7 @@ const GameList = () => {
   }, [dispatch]);
 
   const showToast = (gameTitle: string) => {
-    // Implement custom Android bridge here.
+    ToastModule.showToast(gameTitle);
   };
 
   const extractIdFromSteamUrl = (steamUrl: string): string => {
