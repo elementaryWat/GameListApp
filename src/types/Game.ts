@@ -7,4 +7,5 @@ export interface Game {
   publisher: string;
   genre: string;
   status: string;
+  imageUrl?: string;
 }
